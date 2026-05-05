@@ -42,8 +42,12 @@ protected:
 	void MulticastFire(const FVector_NetQuantize& TraceHitTarget);
 
 	void TraceUnderCroohairs(FHitResult& TraceHitResult);
+
+	void SetHUDCrosshairs(float DeltaTime);
 private:
 	class ABlasterCharacter* Character;
+	class ABlasterPlayerController* Controller;
+	class ABlasterHUD* HUD;
 
 	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	class AWeapon* EquippedWeapon;
@@ -59,7 +63,7 @@ private:
 
 	bool bFireButtonPressed;
 
-	//FVector HitTarget;
+	
 public:	
 
 	
