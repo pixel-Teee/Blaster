@@ -127,22 +127,22 @@ void UCombatComponent::TraceUnderCroohairs(FHitResult& TraceHitResult)
 			Start,
 			End,
 			ECollisionChannel::ECC_Visibility);
-// 		if (!TraceHitResult.bBlockingHit)
-// 		{
-// 			TraceHitResult.ImpactPoint = End;
-// 			HitTarget = End;
-// 		}
-// 		else
-// 		{
-// 			HitTarget = TraceHitResult.ImpactPoint;
-// 			DrawDebugSphere(
-// 				GetWorld(),
-// 				TraceHitResult.ImpactPoint,
-// 				12.f,
-// 				12,
-// 				FColor::Red
-// 			);
-// 		}
+		if (!TraceHitResult.bBlockingHit)
+		{
+			TraceHitResult.ImpactPoint = End;
+			HitTarget = End;
+		}
+		else
+		{
+			HitTarget = TraceHitResult.ImpactPoint;
+			//DrawDebugSphere(
+			//	GetWorld(),
+			//	TraceHitResult.ImpactPoint,
+			//	12.f,
+			//	12,
+			//	FColor::Red
+			//);
+		}
 	}
 }
 
