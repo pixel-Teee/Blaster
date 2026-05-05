@@ -229,6 +229,7 @@ void ABlasterCharacter::AimOffset(float DeltaTime)
 	//{
 	//	UE_LOG(LogTemp, Warning, TEXT("base yaw:%f, server yaw:%f"), GetBaseAimRotation().Yaw, AO_Yaw);
 	//}
+	UE_LOG(LogTemp, Warning, TEXT("base yaw:%f, ao yaw:%f"), GetBaseAimRotation().Yaw, AO_Yaw);
 
 	AO_Pitch = GetBaseAimRotation().Pitch;
 	if (AO_Pitch > 90.f && !IsLocallyControlled())
@@ -349,6 +350,12 @@ AWeapon* ABlasterCharacter::GetEquippedWeapon()
 {
 	if (Combat == nullptr) return nullptr;
 	return Combat->EquippedWeapon;
+}
+
+FVector ABlasterCharacter::GetHitTarget() const
+{
+	if (Combat == nullptr) return FVector();
+	return Combat->HitTarget;
 }
 
 void ABlasterCharacter::Tick(float DeltaTime)
