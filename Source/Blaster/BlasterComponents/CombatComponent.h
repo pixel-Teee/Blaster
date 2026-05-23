@@ -57,6 +57,8 @@ protected:
 	void ServerReload();
 
 	void HandleReload();
+
+	int32 AmmountToReload();
 private:
 	UPROPERTY()
 	class ABlasterCharacter* Character;
@@ -140,6 +142,8 @@ private:
 
 	UFUNCTION()
 	void OnRep_CombatState();
+
+	void UpdateAmmoValues();
 public:	
 
 	
