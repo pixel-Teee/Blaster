@@ -67,6 +67,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	bool bAutomatic = true;
+
+	UPROPERTY(EditAnywhere)
+	class USoundCue* EquipSound;
 protected:
 	virtual void BeginPlay() override;
 
@@ -128,6 +131,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	EWeaponType WeaponType;
+
 public:	
 	
 	void SetWeaponState(EWeaponState State);
