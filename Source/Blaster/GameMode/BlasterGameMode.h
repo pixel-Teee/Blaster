@@ -37,7 +37,7 @@ public:
 	float MatchTime = 120.f;
 
 	UPROPERTY(EditDefaultsOnly)
-	float MatchTime = 120.f;
+	float CooldownTime = 10.f;
 
 	float LevelStartingTime = 0.f;
 

@@ -215,10 +215,10 @@ void ABlasterPlayerController::HandleCooldown()
 	BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
 	if (BlasterHUD)
 	{
-		BlasterHUD->AddCharacterOverlay();
+		BlasterHUD->CharacterOverlay->RemoveFromParent();
 		if (BlasterHUD->Announcement)
 		{
-			BlasterHUD->Announcement->SetVisibility(ESlateVisibility::Hidden);
+			BlasterHUD->Announcement->SetVisibility(ESlateVisibility::Visible);
 		}
 	}
 }
