@@ -23,14 +23,56 @@ public:
 	void SetHUDMatchCountdown(float CountdownTime);
 	virtual void OnPossess(APawn* aPawn) override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	virtual float GetServerTime();//synced with server world clock
+	virtual void ReceivedPlayer() override;//sync with server clock as soon as possible
+	void OnMatchStateSet(FName State);
+	void HandleMatchHasStarted();
 protected:
 	virtual void BeginPlay() override;
 
 	void SetHUDTime();
+	void PollInit();
+
+	/*
+	* Sync time between client and server
+	*/
+
+	//requests the current server time, passing in the client's time when the request was sent
+	UFUNCTION(Server,Reliable)
+	void ServerRequestServerTime(float TimeOfClientRequest);
+
+	//reports the current server time to the client in response to ServerRequestServerTime
+	UFUNCTION(Client, Reliable)
+	void ClientReportServerTime(float TimeOfClientRequest, float TimeServerReceivedClientRequest);
+
+	float ClientServerDelta = 0.f;//difference between client and server time
+
+	UPROPERTY(EditAnywhere, Category = Time)
+	float TimeSyncFrequency = 5.f;
+
+	float TimeSyncRunningTime = 0.f;
+	void checkTimeSync(float DeltaTime);
 private:
 	UPROPERTY()
 	class ABlasterHUD* BlasterHUD;
 
 	float MatchTime = 120.f;
-	uint32 CountdonwInt;
+	uint32 CountdownInt;
+
+	UPROPERTY(ReplicatedUsing = OnRep_MatchState)
+	FName MatchState;
+
+	UFUNCTION()
+	void OnRep_MatchState(FName State);
+
+	UPROPERTY()
+	class UCharacterOverlay* CharacterOverlay;
+	bool bInitializeCharacterOverlay = false;
+
+	float HUDHealth;
+	float HUDMaxHealth;
+	float HUDScore;
+	int32 HUDDefeats;
 };
