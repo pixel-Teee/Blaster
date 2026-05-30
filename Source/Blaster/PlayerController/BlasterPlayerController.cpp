@@ -152,6 +152,7 @@ void ABlasterPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//每帧更新HUD
 	SetHUDTime();
 
 	checkTimeSync(DeltaTime);
@@ -214,6 +215,8 @@ void ABlasterPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	BlasterHUD = Cast<ABlasterHUD>(GetHUD());
+
+	//检查中途加入游戏
 	ServerCheckMatchState();
 }
 
