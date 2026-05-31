@@ -292,7 +292,7 @@ void ABlasterPlayerController::SetHUDTime()
 		}
 		if (MatchState == MatchState::InProgress)
 		{
-			SetHUDMatchCountdown(MatchTime - GetWorld()->GetTimeSeconds());
+			SetHUDMatchCountdown(SecondsLeft);
 		}
 	}
 
