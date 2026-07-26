@@ -9,12 +9,17 @@
 #include "Components/BoxComponent.h"
 #include "NiagaraSystemInstance.h"
 #include "Components/AudioComponent.h"
+#include "RocketMovementComponent.h"
 
 AProjectileRocket::AProjectileRocket()
 {
 	RocketMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Rocket Mesh"));
 	RocketMesh->SetupAttachment(RootComponent);
 	RocketMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	RocketMovementComponent = CreateDefaultSubobject<URocketMovementComponent>(TEXT("RocketMovementComponent"));
+	RocketMovementComponent->bRotationFollowsVelocity = true;
+	RocketMovementComponent->SetIsReplicated(true);
 }
 
 void AProjectileRocket::Destroyed()
@@ -28,6 +33,11 @@ UPrimitiveComponent* OtherComp,
 FVector NormalImpulse, 
 const FHitResult& Hit)
 {
+	if (OtherActor == GetOwner())
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("Hit Self"));
+		return;
+	}
 	APawn* FiringPawn = GetInstigator();
 	if (FiringPawn && HasAuthority())
 	{
