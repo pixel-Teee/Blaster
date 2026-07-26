@@ -132,11 +132,17 @@ private:
 
 	TMap<EWeaponType, int32> CarriedAmmoMap;
 
+	/*
+	*	各种枪的初始子弹容量
+	*/
 	UPROPERTY(EditAnywhere)
 	int32 StartingARAmmo = 30;
 
 	UPROPERTY(EditAnywhere)
 	int32 StartingRocketAmmo = 30;
+
+	UPROPERTY(EditAnywhere)
+	int32 StartingPistolAmmo = 30;
 
 	void InitializeCarriedAmmo();
 
