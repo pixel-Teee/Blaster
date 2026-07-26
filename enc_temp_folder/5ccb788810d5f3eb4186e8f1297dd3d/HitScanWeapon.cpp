@@ -52,7 +52,7 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 					UGameplayStatics::SpawnEmitterAtLocation(
 						World,
 						ImpactParticles,
-						FireHit.ImpactPoint,
+						End,
 						FireHit.ImpactNormal.Rotation()
 					);
 				}
